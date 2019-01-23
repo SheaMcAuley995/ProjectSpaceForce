@@ -2,21 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StatusEffect
+{
+    Wet, Electric, Goo, Blunt, Fire
+}
+
 public class Battery : Interactable
 {
+    StatusEffect status;
+
     [Header("Battery Life")]
     public float fullBatteryLife = 100f;
     public float minBatteryLife = 0f;
     float batteryLife;
 
     [Header("Charge Modifiers")]
-    [SerializeField] float drainRate = 2f;
-    [SerializeField] float rechargeRate = 1f;
+    [SerializeField] float initialDrainRate = 2f;
+    [SerializeField] float initialRechargeRate = 1f;
+    [SerializeField] float doubleDrainRate = 4f;
+    [SerializeField] float doubleRechargeRate = 2f;
+    [SerializeField] float slowDrainRate = 1f;
+    [SerializeField] float slowRechargeRate = 0.5f;
+    float drainRate;
+    float rechargeRate;
 
     [Header("Battery Status")]
     public bool isSupplyingPower;
     public bool isCharging;
 
+
+    public Battery(StatusEffect Status)
+    {
+        status = Status;
+    }
 
     void Start()
     {
@@ -43,7 +61,7 @@ public class Battery : Interactable
             batteryLife += rechargeRate * Time.deltaTime;
         }
     }
-
+    
     void CheckBatteryStatus()
     {
         if (isSupplyingPower)
@@ -60,17 +78,20 @@ public class Battery : Interactable
     void SetStats()
     {
         batteryLife = fullBatteryLife;
+        drainRate = initialDrainRate;
+        rechargeRate = initialRechargeRate;
     }
 
     #region Interact Functions
     public override void Wet()
     {
-        Debug.Log("Do Wet Thing");
+        Debug.Log("Nothing");
     }
 
     public override void Electric()
     {
-        Debug.Log("Do Electric Thing");
+        rechargeRate = doubleRechargeRate;
+        drainRate = slowDrainRate;
     }
 
     public override void Goo()
