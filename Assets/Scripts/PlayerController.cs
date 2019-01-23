@@ -47,26 +47,10 @@ public class PlayerController : MonoBehaviour {
         float targetSpeed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
 
-        //velocityY += Time.deltaTime * gravity;
 
         rb.velocity = transform.forward * currentSpeed;
 
-
-        //controller.Move(rb.velocity * Time.deltaTime);
-
-       //if (controller.isGrounded)
-       //{
-       //    velocityY = 0;
-       //}
     }
 
 
-   // void Jump()
-   // {
-   //     if(controller.isGrounded)
-   //     {
-   //         float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpheight);
-   //         velocityY = jumpheight;
-   //     }
-   // }
 }
