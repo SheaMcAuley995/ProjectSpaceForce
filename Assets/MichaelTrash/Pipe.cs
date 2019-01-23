@@ -8,36 +8,48 @@ public enum PipeDamageLevels
     Fixed, MediumDamage, Broken
 }
 
+
 public class Pipe : Interactable
 {
-    PipeDamageLevels pipeDamage;
+    int pipeDamage = 0;
     
+    public Pipe(PipeDamageLevels damageLevels, float damageTime)
+    {
+        damageLevels = PipeDamageLevels.Fixed;
+        damageTime = 100f;
+    }
+   
     private void Update()
     {
         CheckPipeStatus();
-        
+       
     }
-
+    
     private void CheckPipeStatus()
     {
-        
+        if (true)
+        {
+
+        }
     }
     void PipeStatus()
     {
         switch (pipeDamage)
         {
-            case PipeDamageLevels.Fixed:
+            case (int)PipeDamageLevels.Fixed:
                 break;
-            case PipeDamageLevels.MediumDamage:
+            case (int)PipeDamageLevels.MediumDamage:
                 break;
-            case PipeDamageLevels.Broken:
+            case (int)PipeDamageLevels.Broken:
                 break;
             default:
                 break;
         }
-
+        
     }
-
+    
+    
+    
     #region Interact Functions
     //wet electric goo blunt fire
     public override void Wet()
@@ -54,8 +66,6 @@ public class Pipe : Interactable
 
 }
 
-
-
 // goo makes break rate slower
-//broken pipe gradually reduces hull integrity
-//pipes leak water
+// broken pipe gradually reduces hull integrity
+// pipes leak water
